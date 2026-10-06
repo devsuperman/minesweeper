@@ -8,7 +8,8 @@ The goal of the project is to **learn React**, so the stack is kept small and ma
 | Language         | **TypeScript**                  | Makes the board/cell data shapes explicit and catches mistakes early. |
 | Build tool / dev server | **Vite**                 | Fast start, hot reload, minimal config. `create-react-app` is deprecated. |
 | Testing          | **Vitest** + **React Testing Library** | Vitest shares Vite's config; RTL tests components the way users use them. |
-| Styling          | **CSS Modules** (plain CSS)     | Scoped class names with no extra library; ideal for the retro bevel look. |
+| Styling          | **Tailwind CSS v4** + **CSS Modules** | Tailwind for layout and shadcn components; CSS Modules for the custom retro bevel look of the board. |
+| UI components    | **shadcn/ui** (Radix + Tailwind) | Copy-in components in `src/components/ui`, owned by the project. Used for the app chrome (buttons, cards, menus), not the cells. |
 | State management | **React built-ins** (`useReducer`, `useContext`) | No Redux/Zustand: the state is small and learning the built-ins is the point. |
 | Linting          | **oxlint** (Vite template default) | Fast linter; add `eslint-plugin-react-hooks` later if you want the rules-of-hooks checks. |
 | Package manager  | **npm**                         | Default, no extra install. |
@@ -18,7 +19,7 @@ The goal of the project is to **learn React**, so the stack is kept small and ma
 
 - **Next.js / Remix**: no server, routing or SSR is needed.
 - **Redux / Zustand**: overkill for one reducer.
-- **Tailwind / UI kits**: the Windows look is custom CSS anyway.
+- **Heavy UI kits (MUI, Chakra)**: shadcn/ui covers what we need.
 - **Canvas / game engines**: we want the DOM and React's rendering model.
 
 ## Project layout
@@ -35,7 +36,9 @@ src/
     Board.tsx
     Cell.tsx
     Header.tsx
+    ui/            # shadcn/ui components (Button, Card, ...)
     DifficultyMenu.tsx
+  lib/utils.ts     # cn() helper used by shadcn
   hooks/
     useGame.ts     # useReducer wrapper
     useTimer.ts
@@ -51,8 +54,15 @@ docs/
 ```
 npm install
 npm run dev        # dev server
-npm test           # Vitest
+npm test           # Vitest (run once)
+npm run test:watch
 npm run lint
 npm run build      # production build
 npm run preview    # serve the build
 ```
+
+## shadcn/ui notes
+
+- Config is in `components.json`; the `@` alias points to `src/`.
+- Add components with `npx shadcn@latest add <name>` (e.g. `select`, `dialog`, `dropdown-menu`). Components are copied into `src/components/ui`; you can edit them freely.
+- Theme variables live in `src/index.css`.
