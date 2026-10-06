@@ -10,7 +10,7 @@ The goal of the project is to **learn React**, so the stack is kept small and ma
 | Testing          | **Vitest** + **React Testing Library** | Vitest shares Vite's config; RTL tests components the way users use them. |
 | Styling          | **CSS Modules** (plain CSS)     | Scoped class names with no extra library; ideal for the retro bevel look. |
 | State management | **React built-ins** (`useReducer`, `useContext`) | No Redux/Zustand: the state is small and learning the built-ins is the point. |
-| Linting/format   | **ESLint** (with `react-hooks` plugin) + **Prettier** | The hooks lint rules teach the rules of hooks. |
+| Linting          | **oxlint** (Vite template default) | Fast linter; add `eslint-plugin-react-hooks` later if you want the rules-of-hooks checks. |
 | Package manager  | **npm**                         | Default, no extra install. |
 | Deployment       | **GitHub Pages** (or Vercel)    | Static site, free. |
 

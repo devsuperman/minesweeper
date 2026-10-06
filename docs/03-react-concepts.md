@@ -125,7 +125,7 @@ Rule of thumb: effects are for syncing with external systems, not for computing 
 
 **What:** Call hooks only at the top level of components/hooks, never inside loops, conditions or nested functions.
 
-**Here:** Enforced by the `eslint-plugin-react-hooks` lint rules.
+**Here:** Enforced by the `react-hooks` lint rules (oxlint ships these).
 
 ## 14. Lifting state up
 
