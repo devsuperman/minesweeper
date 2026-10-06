@@ -1,8 +1,11 @@
-import type { CellData } from '../game/types'
+import type { MouseEvent } from 'react'
+import type { CellData } from '@/game/types'
 import styles from './Cell.module.css'
 
 type CellProps = {
   cell: CellData
+  onClick: () => void
+  onFlag: () => void
 }
 
 function content(cell: CellData): string {
@@ -12,7 +15,7 @@ function content(cell: CellData): string {
   return cell.adjacent > 0 ? String(cell.adjacent) : ''
 }
 
-export function Cell({ cell }: CellProps) {
+export function Cell({ cell, onClick, onFlag }: CellProps) {
   const revealed = cell.state === 'revealed'
   const className = [
     styles.cell,
@@ -20,5 +23,15 @@ export function Cell({ cell }: CellProps) {
     revealed && cell.adjacent > 0 ? styles[`n${cell.adjacent}`] : '',
   ].join(' ')
 
-  return <div className={className}>{content(cell)}</div>
+  // Right click: stop the browser's context menu, then flag instead.
+  const handleContextMenu = (e: MouseEvent) => {
+    e.preventDefault()
+    onFlag()
+  }
+
+  return (
+    <div className={className} onClick={onClick} onContextMenu={handleContextMenu}>
+      {content(cell)}
+    </div>
+  )
 }
